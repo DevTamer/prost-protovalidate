@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE-MIT)
 [![MSRV](https://img.shields.io/badge/MSRV-1.86-blue.svg)](https://blog.rust-lang.org/2025/04/03/Rust-1.86.0.html)
 
+**English** · [Español](README.es-ES.md)
+
 Validation for Protocol Buffer messages using [buf.validate](https://github.com/bufbuild/protovalidate) rules — a runtime engine built on `prost-reflect`, plus a **compile-time validation path via [`prost-protovalidate-build`](crates/prost-protovalidate-build/)** targeting both [`prost`](https://crates.io/crates/prost) and [`buffa`](https://crates.io/crates/buffa) message types.
 
 By default, `prost-protovalidate` evaluates `buf.validate` constraints (including Common Expression Language / CEL expressions) at runtime through `prost-reflect`, enforcing rules directly from your single source of truth — your `.proto` files. For messages with standard (non-CEL) rules, `prost-protovalidate-build` generates `impl Validate` at compile time so validation runs through monomorphized direct field access — the fastest path at runtime: no reflection, no CEL interpreter on the hot path. On the buffa backend, CEL-bearing messages can additionally be routed through the runtime engine (`runtime_bridge`), giving buffa types the **full** `buf.validate` rule surface from one library.
@@ -179,7 +181,7 @@ compile-time validators above for a CEL-free dependency tree end to end.
 
 ```toml
 [dependencies]
-prost-protovalidate = { version = "0.4", default-features = false }
+prost-protovalidate = { version = "0.6", default-features = false }
 ```
 
 Standard rules work normally; messages with CEL rules produce a
